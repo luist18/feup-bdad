@@ -6,7 +6,7 @@ This repository comprises the exercises done within the course unit Databases @ 
 
 ## Exercise sheets table of contents
 
-- [1. UML Data Modeling](uml-data-modeling/README.md)
+- [1. UML Data Modeling](uml-data-modeling)
 
 ### Disclaimer
 

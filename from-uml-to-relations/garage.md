@@ -1,0 +1,15 @@
+**Garage**
+
+- Person (<ins>id</ins>, name, address, phoneNumber)
+- Worker (<ins>personId</ins>->Person, totalWorkHours)
+- Client (<ins>personId</ins>->Person)
+- Specialty (<ins>workerId</ins>->Worker, type, cost)
+- Car (<ins>plate</ins>, personId->Person, model->CarModel)
+- CarModel (<ins>model</ins>, <ins>brand</ins>->Brand)
+- Brand (<ins>name</ins>)
+- Repair (<ins>id</ins>, beginDate, endDate, clientId->Client, carId->Car)
+- WorkerJob (<ins>repairId</ins>->Worker, <ins>workerId</ins>->Worker)
+- RepairHours (<ins>workerJob</ins>->WorkerJob, hoursSpent)
+- VehiclePart (<ins>code</ins>, designation, cost, quantity)
+- VehiclePartCompatible (<ins>partId</ins>->VehiclePart, <ins>carModel</ins>->CarModel)
+- PartsUsage (number, <ins>repair</ins>->Repair, <ins>vehiclePart</ins>->VehiclePart)
