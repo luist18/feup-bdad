@@ -15,7 +15,6 @@ DROP TABLE IF EXISTS duel;
 CREATE TABLE team (
   name TEXT,
   country TEXT,
-
   CONSTRAINT team_pk PRIMARY KEY (name)
 );
 
@@ -26,7 +25,6 @@ CREATE TABLE aircraft (
   width REAL,
   height REAL,
   weight REAL,
-
   CONSTRAINT aircraft_pk PRIMARY KEY (model)
 );
 
@@ -38,7 +36,6 @@ CREATE TABLE pilot (
   birthday DATE,
   name TEXT,
   model TEXT,
-
   CONSTRAINT pilot_team_fk FOREIGN KEY (name) REFERENCES team,
   CONSTRAINT pilot_aircraft_fk FOREIGN KEY (model) REFERENCES aircraft
 );
@@ -50,7 +47,6 @@ CREATE TABLE race (
   date DATE UNIQUE,
   gates INTEGER,
   eliminations INTEGER,
-
   CONSTRAINT race_pk PRIMARY KEY (location, edition)
 );
 
@@ -67,13 +63,21 @@ CREATE TABLE participation (
   eliminationtime REAL CHECK (eliminationtime >= 0),
   eliminationpos INTEGER CHECK (eliminationpos > 0),
   eliminationpenalty REAL,
-
   CONSTRAINT participation_pk PRIMARY KEY (num, location, edition),
   CONSTRAINT participation_pilot_fk FOREIGN KEY (num) REFERENCES pilot,
   CONSTRAINT participation_race_fk FOREIGN KEY (location, edition) REFERENCES race,
-  CONSTRAINT trainingtime_check CHECK (trainingtime IS NULL OR trainingpos IS NOT NULL),
-  CONSTRAINT qualificationtime_check CHECK (qualificationtime IS NULL OR qualificationpos IS NOT NULL),
-  CONSTRAINT eliminationtime_check CHECK (eliminationtime IS NULL OR eliminationpos IS NOT NULL)
+  CONSTRAINT trainingtime_check CHECK (
+    trainingtime IS NULL
+    OR trainingpos IS NOT NULL
+  ),
+  CONSTRAINT qualificationtime_check CHECK (
+    qualificationtime IS NULL
+    OR qualificationpos IS NOT NULL
+  ),
+  CONSTRAINT eliminationtime_check CHECK (
+    eliminationtime IS NULL
+    OR eliminationpos IS NOT NULL
+  )
 );
 
 CREATE TABLE duel (
@@ -86,7 +90,6 @@ CREATE TABLE duel (
   timepilot2 REAL,
   penaltypilot1 REAL,
   penaltypilot2 REAL,
-  
   CONSTRAINT duel_pk PRIMARY KEY (numpilot1, numpilot2, location, edition),
   CONSTRAINT duel_pilot1_fk FOREIGN KEY (numpilot1) REFERENCES pilot,
   CONSTRAINT duel_pilot2_fk FOREIGN KEY (numpilot2) REFERENCES pilot,
